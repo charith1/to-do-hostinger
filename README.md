@@ -12,7 +12,8 @@ A modern, full-stack todo list application built with Next.js 15, Prisma, and sh
 - ✅ SQLite database with Prisma ORM
 - ✅ Docker support for easy deployment
 - ✅ TypeScript for type safety
-- 🐳 **Available on GitHub Container Registry**
+- 🐳 **Multi-platform Docker images (AMD64 + ARM64)**
+- 📦 **Available on GitHub Container Registry**
 
 ## 🛠️ Tech Stack
 
@@ -20,7 +21,7 @@ A modern, full-stack todo list application built with Next.js 15, Prisma, and sh
 - **UI Components**: shadcn/ui, Tailwind CSS
 - **Database**: SQLite with Prisma ORM
 - **Icons**: Lucide React
-- **Containerization**: Docker
+- **Containerization**: Docker (Multi-platform)
 - **Registry**: GitHub Container Registry (ghcr.io)
 
 ## 🚀 Quick Start
@@ -29,11 +30,11 @@ A modern, full-stack todo list application built with Next.js 15, Prisma, and sh
 
 **Pull and run from GitHub Container Registry:**
 ```bash
-# Latest version
+# Latest version (supports both AMD64 and ARM64)
 docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:latest
 
 # Specific version
-docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:v1.0.0
+docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:v1.0.1
 ```
 
 **Using Docker Compose:**
@@ -65,17 +66,18 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 **GitHub Container Registry:**
 - Repository: `ghcr.io/charith1/to-do-hostinger`
-- Tags available: `latest`, `v1.0.0`
-- Size: 331MB
+- Tags available: `latest`, `v1.0.1`
+- **Platforms**: `linux/amd64`, `linux/arm64`
+- Size: ~331MB per platform
 - Base: Node.js 20 Alpine Linux
 
 **Pull commands:**
 ```bash
-# Pull latest
+# Pull latest (multi-platform)
 docker pull ghcr.io/charith1/to-do-hostinger:latest
 
 # Pull specific version
-docker pull ghcr.io/charith1/to-do-hostinger:v1.0.0
+docker pull ghcr.io/charith1/to-do-hostinger:v1.0.1
 ```
 
 ## 🏗️ Build from Source
@@ -86,6 +88,17 @@ git clone https://github.com/charith1/to-do-hostinger.git
 cd to-do-hostinger
 docker build -t todo-app .
 docker run -p 3000:3000 todo-app
+```
+
+**Multi-platform build:**
+```bash
+# Create a new builder instance
+docker buildx create --name multiplatform --use
+
+# Build for multiple platforms
+docker buildx build --platform linux/amd64,linux/arm64 \
+  -t ghcr.io/charith1/to-do-hostinger:latest \
+  --push .
 ```
 
 ## 📁 Project Structure
@@ -104,7 +117,7 @@ docker run -p 3000:3000 todo-app
 ├── prisma/
 │   ├── schema.prisma           # Database schema
 │   └── migrations/             # Database migrations
-├── Dockerfile                  # Docker configuration
+├── Dockerfile                  # Multi-platform Docker configuration
 ├── docker-compose.yml         # Docker Compose configuration
 └── package.json               # Dependencies and scripts
 ```
@@ -143,29 +156,57 @@ model Todo {
 
 ## 🚀 Deployment Options
 
-### **1. Docker Hub / Registry**
+### **1. Docker Registry (Multi-platform)**
 ```bash
+# Works on both Intel/AMD64 and ARM64 systems
 docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:latest
 ```
 
-### **2. Vercel**
+### **2. Docker Compose**
+```bash
+git clone https://github.com/charith1/to-do-hostinger.git
+cd to-do-hostinger
+docker-compose up
+```
+
+### **3. Vercel**
 ```bash
 npm run build
-# Deploy to Vercel
+# Deploy to Vercel via GitHub integration
 ```
 
-### **3. Railway**
-```bash
-# Connect GitHub repository to Railway
-# Automatic deployment on push
-```
+### **4. Railway/Render**
+- Connect GitHub repository
+- Automatic deployment on push
 
-### **4. Self-hosted**
+### **5. Self-hosted VPS**
 ```bash
 git clone https://github.com/charith1/to-do-hostinger.git
 cd to-do-hostinger
 docker-compose up -d
 ```
+
+## 🔧 Architecture Support
+
+**Supported Platforms:**
+- ✅ **Linux AMD64** (Intel/AMD processors)
+- ✅ **Linux ARM64** (Apple Silicon, ARM processors)
+- ✅ **Automatic platform detection**
+
+**Multi-platform Benefits:**
+- Works on both Intel and ARM-based systems
+- Optimized builds for each architecture
+- No compatibility issues across different hardware
+
+## 🐛 Troubleshooting
+
+**"no matching manifest for linux/amd64" error:**
+- This is resolved in v1.0.1+ with multi-platform support
+- Use: `docker pull ghcr.io/charith1/to-do-hostinger:latest`
+
+**Permission denied errors:**
+- Ensure Docker daemon is running
+- Check if the image is public on GitHub Container Registry
 
 ## 🤝 Contributing
 
@@ -184,6 +225,11 @@ This project is open source and available under the [MIT License](LICENSE).
 - **Repository**: [GitHub](https://github.com/charith1/to-do-hostinger)
 - **Container Registry**: [GitHub Packages](https://github.com/charith1/to-do-hostinger/pkgs/container/to-do-hostinger)
 - **Issues**: [Report bugs](https://github.com/charith1/to-do-hostinger/issues)
+
+## 📋 Version History
+
+- **v1.0.1** - Multi-platform Docker support (AMD64 + ARM64)
+- **v1.0.0** - Initial release with single-platform Docker image
 
 ---
 
