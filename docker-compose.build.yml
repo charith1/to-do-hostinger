@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   todo-app:
-    image: ghcr.io/charith1/to-do-hostinger:latest
+    build: .
     ports:
       - "3000:3000"
     environment:

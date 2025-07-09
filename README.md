@@ -2,7 +2,7 @@
 
 A modern, full-stack todo list application built with Next.js 15, Prisma, and shadcn/ui components.
 
-## Features
+## 🎯 Features
 
 - ✅ Create, read, update, and delete todos
 - ✅ Mark todos as completed/incomplete
@@ -12,67 +12,83 @@ A modern, full-stack todo list application built with Next.js 15, Prisma, and sh
 - ✅ SQLite database with Prisma ORM
 - ✅ Docker support for easy deployment
 - ✅ TypeScript for type safety
+- 🐳 **Available on GitHub Container Registry**
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Frontend**: Next.js 15, React 19, TypeScript
 - **UI Components**: shadcn/ui, Tailwind CSS
 - **Database**: SQLite with Prisma ORM
 - **Icons**: Lucide React
 - **Containerization**: Docker
+- **Registry**: GitHub Container Registry (ghcr.io)
 
-## Getting Started
+## 🚀 Quick Start
 
-### Prerequisites
+### Using Docker (Recommended)
 
-- Node.js 20 or later
-- npm or yarn
-- Docker (for containerized deployment)
+**Pull and run from GitHub Container Registry:**
+```bash
+# Latest version
+docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:latest
+
+# Specific version
+docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:v1.0.0
+```
+
+**Using Docker Compose:**
+```bash
+git clone https://github.com/charith1/to-do-hostinger.git
+cd to-do-hostinger
+docker-compose up
+```
 
 ### Local Development
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+**Prerequisites:**
+- Node.js 20 or later
+- npm or yarn
 
-2. Set up the database:
-   ```bash
-   npx prisma generate
-   npx prisma migrate dev
-   ```
+**Setup:**
+```bash
+git clone https://github.com/charith1/to-do-hostinger.git
+cd to-do-hostinger
+npm install
+npx prisma generate
+npx prisma migrate dev
+npm run dev
+```
 
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+## 📦 Container Registry
 
-### Docker Deployment
+**GitHub Container Registry:**
+- Repository: `ghcr.io/charith1/to-do-hostinger`
+- Tags available: `latest`, `v1.0.0`
+- Size: 331MB
+- Base: Node.js 20 Alpine Linux
 
-#### Using Docker directly:
+**Pull commands:**
+```bash
+# Pull latest
+docker pull ghcr.io/charith1/to-do-hostinger:latest
 
-1. Build the Docker image:
-   ```bash
-   docker build -t todo-app .
-   ```
+# Pull specific version
+docker pull ghcr.io/charith1/to-do-hostinger:v1.0.0
+```
 
-2. Run the container:
-   ```bash
-   docker run -p 3000:3000 todo-app
-   ```
+## 🏗️ Build from Source
 
-#### Using Docker Compose:
+**Local Docker build:**
+```bash
+git clone https://github.com/charith1/to-do-hostinger.git
+cd to-do-hostinger
+docker build -t todo-app .
+docker run -p 3000:3000 todo-app
+```
 
-1. Build and run with Docker Compose:
-   ```bash
-   docker-compose up --build
-   ```
-
-2. Access the application at [http://localhost:3000](http://localhost:3000)
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 ├── src/
@@ -93,14 +109,14 @@ A modern, full-stack todo list application built with Next.js 15, Prisma, and sh
 └── package.json               # Dependencies and scripts
 ```
 
-## API Endpoints
+## 🔌 API Endpoints
 
 - `GET /api/todos` - Fetch all todos
 - `POST /api/todos` - Create a new todo
 - `PUT /api/todos/[id]` - Update a todo
 - `DELETE /api/todos/[id]` - Delete a todo
 
-## Database Schema
+## 🗄️ Database Schema
 
 ```prisma
 model Todo {
@@ -113,26 +129,62 @@ model Todo {
 }
 ```
 
-## Environment Variables
+## 🌍 Environment Variables
 
 - `DATABASE_URL` - Database connection string (default: `file:./dev.db`)
 - `NODE_ENV` - Environment mode (development/production)
 
-## Scripts
+## 📜 Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 
-## Contributing
+## 🚀 Deployment Options
+
+### **1. Docker Hub / Registry**
+```bash
+docker run -p 3000:3000 ghcr.io/charith1/to-do-hostinger:latest
+```
+
+### **2. Vercel**
+```bash
+npm run build
+# Deploy to Vercel
+```
+
+### **3. Railway**
+```bash
+# Connect GitHub repository to Railway
+# Automatic deployment on push
+```
+
+### **4. Self-hosted**
+```bash
+git clone https://github.com/charith1/to-do-hostinger.git
+cd to-do-hostinger
+docker-compose up -d
+```
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes and commit: `git commit -m 'Add feature'`
+4. Push to branch: `git push origin feature-name`
 5. Submit a pull request
 
-## License
+## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
+
+## 🔗 Links
+
+- **Repository**: [GitHub](https://github.com/charith1/to-do-hostinger)
+- **Container Registry**: [GitHub Packages](https://github.com/charith1/to-do-hostinger/pkgs/container/to-do-hostinger)
+- **Issues**: [Report bugs](https://github.com/charith1/to-do-hostinger/issues)
+
+---
+
+**Built with ❤️ using Next.js 15, Prisma, and shadcn/ui**
