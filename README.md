@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo App
+
+A modern, full-stack todo list application built with Next.js 15, Prisma, and shadcn/ui components.
+
+## Features
+
+- ✅ Create, read, update, and delete todos
+- ✅ Mark todos as completed/incomplete
+- ✅ Edit todos inline
+- ✅ Responsive design with Tailwind CSS
+- ✅ Modern UI components with shadcn/ui
+- ✅ SQLite database with Prisma ORM
+- ✅ Docker support for easy deployment
+- ✅ TypeScript for type safety
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **UI Components**: shadcn/ui, Tailwind CSS
+- **Database**: SQLite with Prisma ORM
+- **Icons**: Lucide React
+- **Containerization**: Docker
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 20 or later
+- npm or yarn
+- Docker (for containerized deployment)
+
+### Local Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Set up the database:
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Docker Deployment
+
+#### Using Docker directly:
+
+1. Build the Docker image:
+   ```bash
+   docker build -t todo-app .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 3000:3000 todo-app
+   ```
+
+#### Using Docker Compose:
+
+1. Build and run with Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+2. Access the application at [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+├── src/
+│   ├── app/
+│   │   ├── api/todos/          # API routes for todo operations
+│   │   ├── globals.css         # Global styles
+│   │   ├── layout.tsx          # Root layout
+│   │   └── page.tsx            # Main todo app page
+│   ├── components/ui/          # shadcn/ui components
+│   └── lib/
+│       ├── prisma.ts           # Prisma client setup
+│       └── utils.ts            # Utility functions
+├── prisma/
+│   ├── schema.prisma           # Database schema
+│   └── migrations/             # Database migrations
+├── Dockerfile                  # Docker configuration
+├── docker-compose.yml         # Docker Compose configuration
+└── package.json               # Dependencies and scripts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `GET /api/todos` - Fetch all todos
+- `POST /api/todos` - Create a new todo
+- `PUT /api/todos/[id]` - Update a todo
+- `DELETE /api/todos/[id]` - Delete a todo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Database Schema
 
-## Learn More
+```prisma
+model Todo {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `DATABASE_URL` - Database connection string (default: `file:./dev.db`)
+- `NODE_ENV` - Environment mode (development/production)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
